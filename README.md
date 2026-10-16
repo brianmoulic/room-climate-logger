@@ -2,7 +2,7 @@
 
 A full-stack web app that logs the temperature and humidity of my room, so I can see how it changes through the day. I made it because my room gets very humid and I wanted to track it instead of guessing.
 
-**Live app:** https://dashboard.render.com/web/srv-db8mlg689jmc73eo9ih0/deploys/dep-db8mot7avr4c73dh4jng
+**Live app:** https://room-climate-logger.onrender.com
 
 Note: the app is on a free host, so if nobody has used it for a while, the first load can take about a minute to wake up.
 
