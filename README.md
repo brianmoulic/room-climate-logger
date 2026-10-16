@@ -49,7 +49,7 @@ The `.env` file is not uploaded to GitHub because it has my private database pas
 
 ## Bonus extensions
 
-- App Inventor mobile app: not done yet
+- App Inventor mobile app: shows the latest reading from the live backend
 - Arduino (simulated sensor): not done yet
 
 ## Author
