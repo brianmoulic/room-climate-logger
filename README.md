@@ -41,7 +41,7 @@ You need Node.js installed and a free MongoDB Atlas cluster.
 3. Install the packages: `npm install`
 4. Create a file named `.env` in the main folder with these two lines:
    - `PORT=3000`
-   - `MONGODB_URI=mongodb+srv://mbmoulic_db_user:h00RaaYJ8rXzSeHR@cluster0.h4pbjpd.mongodb.net/`
+   - `MONGODB_URI=mongodb+srv://mbmoulic_db_<user>:<password>@cluster0.h4pbjpd.mongodb.net/` (use real user and password for this one)
 5. Start the app: `npm start`
 6. Open `http://localhost:3000` in your browser.
 
