@@ -50,7 +50,7 @@ The `.env` file is not uploaded to GitHub because it has my private database pas
 ## Bonus extensions
 
 - App Inventor mobile app: shows the latest reading from the live backend
-- Arduino (simulated sensor): an ESP32 with a DHT22 sensor, simulated in Wokwi, sends temperature and humidity readings to the live backend. Simulation link: https://wokwi.com/projects/478001456943946753
+- Arduino (simulated sensor): an ESP32 with a DHT22 sensor. The sensor is simulated in Wokwi, so the values are set by sliders and are not real measurements. Simulation link: https://wokwi.com/projects/478001456943946753
 
 ## Author
 
