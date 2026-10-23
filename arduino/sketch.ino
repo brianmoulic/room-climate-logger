@@ -1,6 +1,5 @@
 #include <WiFi.h>
 #include <WiFiClientSecure.h>
-#include <HTTPClient.h>
 #include "DHT.h"
 
 #define DHTPIN 15
@@ -9,8 +8,8 @@ DHT dht(DHTPIN, DHTTYPE);
 
 const char* ssid = "Wokwi-GUEST";
 const char* password = "";
-// CHANGE THIS LINE to your live address + /api/readings
-const char* serverUrl = "https://room-climate-logger.onrender.com/api/readings";
+const char* host = "room-climate-logger.onrender.com";
+const char* path = "/api/readings";
 
 void setup() {
   Serial.begin(115200);
@@ -36,19 +35,38 @@ void loop() {
 
   WiFiClientSecure client;
   client.setInsecure();
-  HTTPClient http;
-  http.setTimeout(60000);
-  http.begin(client, serverUrl);
-  http.addHeader("Content-Type", "application/json");
 
-  String body = "{\"temperature\":" + String(t, 1) +
+  Serial.println("Connecting to server...");
+  if (!client.connect(host, 443)) {
+    Serial.println("Connection to server failed");
+    delay(30000);
+    return;
+  }
+
+    String body = "{\"temperature\":" + String(t, 1) +
                 ",\"humidity\":" + String(h, 1) +
                 ",\"note\":\"from simulated sensor\"}";
 
-  int code = http.POST(body);
+  client.println("POST " + String(path) + " HTTP/1.1");
+  client.println("Host: " + String(host));
+  client.println("Content-Type: application/json");
+  client.println("Connection: close");
+  client.println("Content-Length: " + String(body.length()));
+  client.println();
+  client.print(body);
+
   Serial.println("Sent: " + body);
-  Serial.println("Response code: " + String(code));
-  http.end();
+
+  client.setTimeout(30000);
+  unsigned long start = millis();
+  while (client.connected() && !client.available() && millis() - start < 40000) {
+    delay(100);
+  }
+  Serial.println("Waited ms: " + String(millis() - start));
+
+  String status = client.readStringUntil('\n');
+  Serial.println("Server replied: [" + status + "]");
+  client.stop();
 
   delay(30000);
 }
